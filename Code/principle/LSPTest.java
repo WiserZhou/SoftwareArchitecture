@@ -1,4 +1,4 @@
-package 知识点.Liskov;
+package Code.principle;
 
 // 主类，入口程序
 public class LSPTest {

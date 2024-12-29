@@ -1,4 +1,4 @@
-package 知识点.Open_Close;
+package Code.principle;
 
 // 水果的基类
 abstract class Fruit {
