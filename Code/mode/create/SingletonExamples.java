@@ -1,4 +1,4 @@
-package Code.mode.creative;
+package Code.mode.create;
 
 // 1. 懒汉式（线程不安全）
 class SingletonLazyUnsafe {

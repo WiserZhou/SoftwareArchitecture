@@ -1,4 +1,4 @@
-package Code.mode.creative;
+package Code.mode.create;
 
 // Shape接口
 interface Shape {
