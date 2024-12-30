@@ -1,0 +1,13 @@
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\factory\MessageFactory.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\LogisticsInfo.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\interfaces\Message.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\Consumer.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\implement\SimpleMessageQueue.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\Example.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\implement\SimpleMessage.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\implement\SimpleMessageCenter.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\Main.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\interfaces\MessageQueue.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\interfaces\MessageCenter.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\Producer.java
+C:\Users\21029\Desktop\软件架构与中间件\code\simpleMOM2\src\main\java\org\example\interfaces\MessageListener.java

@@ -1,0 +1,85 @@
+@startuml
+!define YELLOW_BOX #FFFFB9
+!define RED_LINE #A8504B
+
+hide footbox
+
+skinparam participant {
+    BackgroundColor YELLOW_BOX
+    BorderColor RED_LINE
+}
+
+skinparam sequence {
+    ArrowColor RED_LINE
+    LifeLineColor RED_LINE
+    BoxBorderColor RED_LINE
+    BoxBackgroundColor YELLOW_BOX
+    ActivationBackgroundColor YELLOW_BOX
+}
+
+skinparam actor {
+    BackgroundColor YELLOW_BOX
+    BorderColor RED_LINE
+}
+
+actor Client as C
+participant "MessageCenter" as MC
+participant "MessageQueue1" as MQ1
+participant "MessageQueue2" as MQ2
+participant "Listener1" as L1
+participant "Listener2" as L2
+
+C -> MC : registerQueue(queue1)
+activate MC
+MC -> MQ1 : register(queue1)
+deactivate MC
+
+C -> MC : registerQueue(queue2)
+activate MC
+MC -> MQ2 : register(queue2)
+deactivate MC
+
+C -> MQ1 : addListener(listener1)
+activate MQ1
+MQ1 -> L1 : onMessageChanged(queue1)
+deactivate MQ1
+
+C -> MQ2 : addListener(listener2)
+activate MQ2
+MQ2 -> L2 : onMessageChanged(queue2)
+deactivate MQ2
+
+C -> MC : broadcast(message)
+activate MC
+MC -> MQ1 : enqueue(message)
+MC -> MQ2 : enqueue(message)
+deactivate MC
+
+MQ1 -> L1 : onMessageChanged(queue1)
+activate L1
+L1 -> MQ1 : dequeue()
+MQ1 --> L1 : message
+L1 -> L1 : print("Listener 1: " + message.content)
+deactivate L1
+
+MQ2 -> L2 : onMessageChanged(queue2)
+activate L2
+L2 -> MQ2 : dequeue()
+MQ2 --> L2 : message
+L2 -> L2 : print("Listener 2: " + message.content)
+deactivate L2
+
+C -> MC : unregisterQueue(queue1)
+activate MC
+MC -> MQ1 : unregister(queue1)
+deactivate MC
+
+C -> MC : unregisterQueue(queue2)
+activate MC
+MC -> MQ2 : unregister(queue2)
+deactivate MC
+
+C -> MQ1 : removeListener(listener1)
+C -> MQ2 : removeListener(listener2)
+
+@enduml

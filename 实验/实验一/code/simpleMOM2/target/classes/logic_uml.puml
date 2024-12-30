@@ -1,0 +1,107 @@
+@startuml
+!define YELLOW_BOX #FFFFB9
+!define RED_LINE #A8504B
+
+hide footbox
+
+skinparam participant {
+    BackgroundColor YELLOW_BOX
+    BorderColor RED_LINE
+}
+
+skinparam sequence {
+    ArrowColor RED_LINE
+    LifeLineColor RED_LINE
+    BoxBorderColor RED_LINE
+    BoxBackgroundColor YELLOW_BOX
+    ActivationBackgroundColor YELLOW_BOX
+}
+
+skinparam actor {
+    BackgroundColor YELLOW_BOX
+    BorderColor RED_LINE
+}
+
+participant "Main" as M
+participant "MessageFactory" as MF
+participant "MessageCenter" as MC
+participant "MessageQueue" as MQ
+participant "Producer1" as P1
+participant "Producer2" as P2
+participant "Consumer1" as C1
+participant "Consumer2" as C2
+
+M -> MF: createMessageCenter()
+activate MF
+MF --> M: center
+deactivate MF
+
+M -> MF: createMessageQueue(10)
+activate MF
+MF --> M: queue
+deactivate MF
+
+M -> MC: registerQueue(queue)
+activate MC
+MC --> M: void
+deactivate MC
+
+M -> P1: <<create>>(queue, "Producer 1")
+M -> P2: <<create>>(queue, "Producer 2")
+M -> C1: <<create>>(queue, "Consumer 1")
+M -> C2: <<create>>(queue, "Consumer 2")
+
+M -> P1: start()
+activate P1
+M -> P2: start()
+activate P2
+M -> C1: start()
+activate C1
+M -> C2: start()
+activate C2
+
+loop 10 times
+    P1 -> MF: createMessage("Message i from Producer 1")
+    activate MF
+    MF --> P1: message
+    deactivate MF
+
+    P1 -> MQ: enqueue(message)
+    activate MQ
+    MQ --> P1: void
+    deactivate MQ
+end
+
+loop 10 times
+    P2 -> MF: createMessage("Message i from Producer 2")
+    activate MF
+    MF --> P2: message
+    deactivate MF
+
+    P2 -> MQ: enqueue(message)
+    activate MQ
+    MQ --> P2: void
+    deactivate MQ
+end
+
+loop continuous
+    C1 -> MQ: dequeue()
+    activate MQ
+    MQ --> C1: message
+    deactivate MQ
+end
+
+loop continuous
+    C2 -> MQ: dequeue()
+    activate MQ
+    MQ --> C2: message
+    deactivate MQ
+end
+
+M -> Thread: sleep(5000)
+M -> MC: unregisterQueue(queue)
+activate MC
+MC --> M: void
+deactivate MC
+
+@enduml

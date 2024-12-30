@@ -1,0 +1,13 @@
+org\example\Consumer.class
+org\example\implement\SimpleMessageQueue.class
+org\example\interfaces\Message.class
+org\example\implement\SimpleMessageCenter.class
+org\example\interfaces\MessageQueue.class
+org\example\LogisticsInfo.class
+org\example\interfaces\MessageListener.class
+org\example\factory\MessageFactory.class
+org\example\Producer.class
+org\example\Main.class
+org\example\interfaces\MessageCenter.class
+org\example\implement\SimpleMessage.class
+org\example\Example.class
