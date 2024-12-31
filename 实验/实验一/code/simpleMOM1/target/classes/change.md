@@ -30,6 +30,32 @@ public synchronized Message dequeue() {
 
 2. **RegisterListener 类设计不合理**
 
+RegisterListener 类是一个注册监听器的辅助类，但其设计不太合理。建议直接在 MessageQueue 中实现监听器的注册和移除。
+
+```java:src/main/java/org/example/implement/SimpleMessageQueue.java
+public class SimpleMessageQueue implements MessageQueue {
+    private final List<Message> messages = Collections.synchronizedList(new ArrayList<>());
+    private final List<MessageListener> listeners = Collections.synchronizedList(new ArrayList<>());
+
+    @Override
+    public void addListener(MessageListener listener) {
+        if (listener != null) {
+            listeners.add(listener);
+        }
+    }
+
+    @Override
+    public void removeListener(MessageListener listener) {
+        listeners.remove(listener);
+    }
+
+    private void notifyListeners() {
+        for (MessageListener listener : listeners) {
+            listener.onMessage(messages.get(messages.size() - 1));
+        }
+    }
+}
+```
 RegisterListener 类的设计存在以下问题：
 
 (1). 违反接口设计原则
